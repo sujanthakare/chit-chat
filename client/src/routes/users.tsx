@@ -1,13 +1,12 @@
 /** @jsxImportSource @emotion/react */
 
 import axios from 'axios';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { getUserData } from '../common/utils/session';
 
 const Users: React.FC = () => {
   const history = useHistory();
-  const userData = getUserData();
 
   const [users, setUsers] = useState<
     Array<{
@@ -17,7 +16,8 @@ const Users: React.FC = () => {
   >([]);
 
   useEffect(() => {
-    console.log(userData);
+    const userData = getUserData();
+
     if (!userData) {
       history.push('/');
     } else {
@@ -32,7 +32,7 @@ const Users: React.FC = () => {
 
       getUsers();
     }
-  }, []);
+  }, [history]);
 
   return (
     <div css={{ padding: 5, display: 'flex', flexDirection: 'column' }}>

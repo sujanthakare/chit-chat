@@ -40,10 +40,6 @@ io.on('connection', (socket: Socket) => {
   // ...
 });
 
-app.get('/ping', (req, res) => {
-  return res.send('pong');
-});
-
 app.post('/enter', (req, res) => {
   const { name } = req.body;
 
@@ -59,7 +55,6 @@ app.post('/enter', (req, res) => {
 
 app.get('/users', (req, res) => {
   const { userid } = req.headers;
-  console.log(req.headers);
 
   const usersWithoutCurrentUser = users.filter((user) => {
     if (user.id === userid) {
@@ -78,7 +73,6 @@ app.get('/users', (req, res) => {
 
 app.post('/sendMessage', (req, res) => {
   const { conversationId, fromUserId, toUserId, messageText } = req.body;
-  console.log(conversations);
   createMessage(conversationId, messageText, fromUserId, toUserId);
 
   io.emit('message', messages[conversationId]);

@@ -18,7 +18,7 @@ const Message: React.FC<IMessageProps> = ({ incoming, text }) => {
           width: 'fit-content',
           maxWidth: 200,
           float: incoming ? 'left' : 'right',
-          borderRadius: incoming ? '20px 20px 1px' : '1px 20px 20px',
+          borderRadius: incoming ? '1px 20px 20px' : '20px 20px 1px',
           fontSize: '18px',
         }}
       >

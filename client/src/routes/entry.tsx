@@ -24,7 +24,7 @@ const Entry: React.FC = () => {
     if (userData) {
       history.push('/users');
     }
-  }, []);
+  }, [history]);
 
   return (
     <form

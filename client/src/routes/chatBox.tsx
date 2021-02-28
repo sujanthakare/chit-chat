@@ -45,7 +45,7 @@ const ChatBox: React.FC = () => {
       name: query.get('name'),
       id: query.get('id'),
     };
-  }, []);
+  }, [query]);
 
   const userData = useMemo(() => {
     return getUserData();
@@ -61,13 +61,12 @@ const ChatBox: React.FC = () => {
   >([]);
 
   useEffect(() => {
-    const receiverId = query.get('id');
-    if (userData && receiverId) {
+    if (userData && receiver.id) {
       const socket = io('http://localhost:8080', {
         transports: ['websocket', 'polling', 'flashsocket'],
         query: {
           userId: userData.id,
-          senderId: receiverId,
+          senderId: receiver.id,
         },
       });
       socket.connect();
@@ -86,16 +85,14 @@ const ChatBox: React.FC = () => {
     } else {
       history.push('/users');
     }
-  }, [userData]);
+  }, [userData, history, receiver]);
 
   return (
     <div>
       <h2 css={{ textAlign: 'center', margin: '10px 0 ' }}>{receiver.name}</h2>
       <div css={MESSAGE_BOX}>
         {messages.map((message) => {
-          console.log(message);
-          console.log(userData.id);
-          return <Message key={message.id} text={message.text} incoming={message.fromId === userData.id} />;
+          return <Message key={message.id} text={message.text} incoming={message.toId === userData.id} />;
         })}
       </div>
       <form

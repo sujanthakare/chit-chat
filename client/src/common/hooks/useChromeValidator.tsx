@@ -15,7 +15,6 @@ const useBrowserValidator = () => {
           os: getDeviceOs(),
         });
 
-        console.log(userChromeVersion, response.data.latest);
         if (userChromeVersion.toString() === response.data.latest.toString()) {
           setIsValid(true);
           setIsValidating(false);
